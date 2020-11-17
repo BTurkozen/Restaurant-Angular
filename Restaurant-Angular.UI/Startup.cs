@@ -6,10 +6,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Restaurant_Angular.Common;
+using Restaurant_Angular.Data.DataContext;
+using Restaurant_Angular.Data.Implementaion;
 
 namespace Restaurant_Angular.UI
 {
@@ -26,6 +30,10 @@ namespace Restaurant_Angular.UI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("strConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
