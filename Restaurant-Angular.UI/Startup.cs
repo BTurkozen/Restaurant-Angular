@@ -62,7 +62,7 @@ namespace Restaurant_Angular.UI
 
             app.UseCors(builder =>
             {
-                builder.WithOrigins("https://localhost:4200/").AllowAnyHeader().AllowCredentials();
+                builder.WithOrigins("http://localhost:4200/").AllowAnyHeader().AllowCredentials();
             });
         }
     }

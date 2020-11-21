@@ -56,7 +56,7 @@ export class OrderItemsComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    this.orderService.orderItem.push(form.value);
+    this.orderService.orderItemModel.push(form.value);
     this.dialogRef.close();
   }
 }

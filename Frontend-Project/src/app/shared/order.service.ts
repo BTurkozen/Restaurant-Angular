@@ -6,7 +6,7 @@ import { Order } from './order.model';
   providedIn: 'root',
 })
 export class OrderService {
-  formData: Order;
-  orderItem: OrderItem[];
+  formData: Order = new Order();
+  orderItemModel: Array<OrderItem> = [];
   constructor() {}
 }

@@ -25,7 +25,7 @@ namespace Restaurant_Angular.Business.Implementaion
 
             if (data != null)
             {
-                foreach (var item in items)
+                foreach (var item in data)
                 {
                     items.Add(new ItemDto() {
 

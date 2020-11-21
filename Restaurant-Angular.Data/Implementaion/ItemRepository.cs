@@ -6,8 +6,11 @@ namespace Restaurant_Angular.Data.Implementaion
 {
     public class ItemRepository : Repository<Item>, IItemRepository
     {
+        private readonly AppDbContext _context;
+
         public ItemRepository(AppDbContext context) : base(context)
         {
+            _context = context;
         }
     }
 }

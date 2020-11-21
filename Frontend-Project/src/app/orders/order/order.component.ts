@@ -19,7 +19,7 @@ export class OrderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.orderItemModel = this.orderService.orderItem;
+    this.orderItemModel = this.orderService.orderItemModel;
   }
 
   AddOrEditOrderItem(orderItemIndex, orderId) {
