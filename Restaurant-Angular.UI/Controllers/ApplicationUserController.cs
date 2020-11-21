@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Restaurant_Angular.Business.Constants;
+using Restaurant_Angular.Business.Constracts;
 using Restaurant_Angular.Common.DTOs;
 using Restaurant_Angular.Data.DbModels;
 
@@ -33,8 +33,8 @@ namespace Restaurant_Angular.UI.Controllers
         [Route("register")]
         public async Task<Object> PostApllication(ApplicationUserDto applicationUserDto)
         {
-            var data = _applicationUserBusiness.CreateAppUser(applicationUserDto);
-            var result = data.Result.Data;
+            var data =  _applicationUserBusiness.CreateAppUser(applicationUserDto);
+            var result =  data.Result.Data;
             return Ok(result);
         }
 
