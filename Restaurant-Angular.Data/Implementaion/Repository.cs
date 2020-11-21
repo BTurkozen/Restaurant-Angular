@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Restaurant_Angular.Common;
 using Restaurant_Angular.Data.DataContext;
+using Restaurant_Angular.Data.DataContracts;
 using System;
 using System.Linq;
 

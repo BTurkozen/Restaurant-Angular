@@ -1,8 +1,5 @@
-﻿using Restaurant_Angular.Common;
-using Restaurant_Angular.Data.DataContext;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Restaurant_Angular.Data.DataContext;
+using Restaurant_Angular.Data.DataContracts;
 
 namespace Restaurant_Angular.Data.Implementaion
 {
@@ -13,7 +10,10 @@ namespace Restaurant_Angular.Data.Implementaion
         public UnitOfWork(AppDbContext context)
         {
             _context = context;
+            itemRepository = new ItemRepository(_context);
         }
+
+        public IItemRepository itemRepository { get; private set; }
 
         public void Dispose()
         {

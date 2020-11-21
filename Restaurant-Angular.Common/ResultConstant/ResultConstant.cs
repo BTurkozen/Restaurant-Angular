@@ -6,8 +6,14 @@ namespace Restaurant_Angular.Common.ResultConstant
 {
    public static class ResultConstant
     {
-        public const string RecordCreated = "Kayıt Oluşturuldu";
+        public const string RecordCreated = "Kayıt Oluşturuldu...";
 
-        public static string RecordNotCreated { get; set; }
+        public const string RecordFound= "Kayıt Bulundu...";
+
+        public static string RecordNotCreated = "Kayıt Oluşturulamadı...";
+
+        public static string RecordNotFound = "Kayıt Bulunamadı...";
+
+
     }
 }

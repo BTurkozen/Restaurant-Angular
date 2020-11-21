@@ -1,21 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Restaurant_Angular.Business.Constants;
+using Restaurant_Angular.Business.Constracts;
 using Restaurant_Angular.Business.Implementaion;
-using Restaurant_Angular.Common;
 using Restaurant_Angular.Data.DataContext;
+using Restaurant_Angular.Data.DataContracts;
 using Restaurant_Angular.Data.DbModels;
 using Restaurant_Angular.Data.Implementaion;
 
