@@ -41,6 +41,8 @@ namespace Restaurant_Angular.UI
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("strConnection")));
 
             services.AddIdentity<ApplicationUser,IdentityRole>().AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +64,11 @@ namespace Restaurant_Angular.UI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseCors(builder =>
+            {
+                builder.WithOrigins("https://localhost:4200/").AllowAnyHeader().AllowCredentials();
             });
         }
     }

@@ -18,7 +18,9 @@ export class OrderComponent implements OnInit {
     private matDialog: MatDialog
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.orderItemModel = this.orderService.orderItem;
+  }
 
   AddOrEditOrderItem(orderItemIndex, orderId) {
     const dialogConfig = new MatDialogConfig();
