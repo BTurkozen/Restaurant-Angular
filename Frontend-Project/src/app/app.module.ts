@@ -10,6 +10,8 @@ import { OrderComponent } from './orders/order/order.component';
 import { OrderItemsComponent } from './orders/order-items/order-items.component';
 import { OrderService } from './shared/order.service';
 import { FormsModule } from '@angular/forms';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,10 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    MatSliderModule,
+    MatDialogModule
   ],
+  entryComponents: [OrderItemsComponent],
   providers: [OrderService],
   bootstrap: [AppComponent],
 })

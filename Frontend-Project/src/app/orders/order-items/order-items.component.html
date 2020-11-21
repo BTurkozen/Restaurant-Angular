@@ -1,1 +1,51 @@
-<p>order-items works!</p>
+<h4 class="diplay-5">Yemek Şipariş Detayı</h4>
+
+<hr>
+
+<form #form="ngForm" autocomplete="off">
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label>Yemek Seçimi</label>
+            <div class="input-group">
+                <select name="ItemId" #ItemId="ngModel" [(ngModel)]="formData.ItemId">
+                    <option value="0">== Şeçiniz ==</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label>Fiyat</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">TL</div>
+                </div>
+                <input name="Price" #OrderNo="ngModel" [(ngModel)]="formData.Price" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label>Miktar</label>
+            <input name="Quantity" #Quantity="ngModel" [(ngModel)]="formData.Quantity" class="form-control" />
+        </div>
+
+        <div class="form-group col-md-12">
+            <label>Toplam Fiyat</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">TL</div>
+                </div>
+                <input name="Total" #Total="ngModel" [(ngModel)]="formData.Total" class="form-control" readonly>
+            </div>
+        </div>
+    </div>
+    <div class="form-group float-right">
+        <button type="submit" class="btn btn-outline-primary mr-3">
+            <i class="fa fa-database mr-2"></i>
+            Submit
+        </button>
+        <button type="submit" class="btn btn-outline-danger">
+            <i class="fa fa-close mr-2"></i>
+            Close
+        </button>
+    </div>
+</form>
