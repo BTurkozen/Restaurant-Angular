@@ -11,9 +11,12 @@ namespace Restaurant_Angular.Data.Implementaion
         {
             _context = context;
             itemRepository = new ItemRepository(_context);
+            customerRepository = new CustomerRepository(_context);
         }
 
         public IItemRepository itemRepository { get; private set; }
+
+        public ICustomerRepository customerRepository { get; private set; }
 
         public void Dispose()
         {

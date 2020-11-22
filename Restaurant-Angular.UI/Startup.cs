@@ -31,6 +31,7 @@ namespace Restaurant_Angular.UI
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IApplicationUserBusiness, ApplicationUserBusiness>();
             services.AddScoped<IItemBusiness, ItemBusiness>();
+            services.AddScoped<ICustomerBusiness, CustomerBusiness>();
 
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("strConnection")));
 

@@ -49,20 +49,30 @@ export class OrderItemsComponent implements OnInit {
   }
 
   updatePrice(ctrl) {
-    if (ctrl.selectIndex === 0) {
+    if (ctrl.selectedIndex == 0) {
       this.formData.Price = 0;
       this.formData.ItemName = '';
     } else {
-      this.formData.Price = this.itemList[ctrl.selectIndex - 1].price;
-      this.formData.ItemName = this.itemList[ctrl.selectIndex - 1].name;
+      this.formData.Price = this.itemList[ctrl.target.selectedIndex - 1].price;
+      this.formData.ItemName = this.itemList[
+        ctrl.target.selectedIndex - 1
+      ].name;
+      this.formData.Total = 0;
     }
     this.updateTotal();
   }
 
   updateTotal() {
-    this.formData.Total = parseFloat(
-      (this.formData.Quantity * this.formData.Price).toFixed(2)
-    );
+    if (
+      this.formData.Quantity === undefined ||
+      this.formData.Price === undefined
+    ) {
+      this.formData.Total = 0;
+    } else {
+      this.formData.Total = parseFloat(
+        (this.formData.Quantity * this.formData.Price).toFixed(2)
+      );
+    }
   }
 
   onSubmit(form: NgForm) {

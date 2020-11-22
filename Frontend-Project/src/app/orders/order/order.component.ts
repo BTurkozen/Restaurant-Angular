@@ -33,6 +33,25 @@ export class OrderComponent implements OnInit {
 
     dialogConfig.data = { orderItemIndex, orderId };
 
-    this.matDialog.open(OrderItemsComponent, dialogConfig);
+    this.matDialog.open(OrderItemsComponent, dialogConfig).afterClosed().subscribe(res =>{
+      this.updateGrandTotal();
+    });
+  }
+
+  DeleteOrderItem(orderItemIndex, orderId) {
+    this.orderService.orderItemModel.splice(orderItemIndex, 1);
+    this.updateGrandTotal();
+  }
+
+  updateGrandTotal() {
+    this.orderModel.GrantTotal = this.orderService.orderItemModel.reduce(
+      (prev, curr) => {
+        return prev + curr.Total;
+      },
+      0
+    );
+    this.orderModel.GrantTotal = parseFloat(
+      this.orderModel.GrantTotal.toFixed(2)
+    );
   }
 }
