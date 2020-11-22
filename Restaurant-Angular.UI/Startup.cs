@@ -34,14 +34,33 @@ namespace Restaurant_Angular.UI
 
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("strConnection")));
 
-            services.AddIdentity<ApplicationUser,IdentityRole>().AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
 
-            services.AddCors();
+            services.AddCors(options => options.AddPolicy("MyPolicy", builder =>
+            {
+                builder.WithOrigins("http://localhost:4200/").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+
+            }));
+
+            //services.Configure<MvcOptions>(options =>
+            //{
+            //    options.Filters.Add(new CorsAuthorizationFilterFactory("MyPolicy"));
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //app.UseCors(options =>
+            //{
+            //    options.WithOrigins("http://localhost:4200/")
+            //    .AllowAnyMethod()
+            //    .AllowAnyHeader()
+            //    .AllowCredentials();
+            //});
+
+            app.UseCors("MyPolicy");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -60,10 +79,7 @@ namespace Restaurant_Angular.UI
                 endpoints.MapControllers();
             });
 
-            app.UseCors(builder =>
-            {
-                builder.WithOrigins("http://localhost:4200/").AllowAnyHeader().AllowCredentials();
-            });
+
         }
     }
 }

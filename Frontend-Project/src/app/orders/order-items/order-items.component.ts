@@ -26,6 +26,8 @@ export class OrderItemsComponent implements OnInit {
     this.itemService
       .getItemList()
       .then((res) => (this.itemList = res as Item[]));
+      console.log(this.itemList);
+      console.log("this.data", this.data);
 
     this.formData = {
       OrderItemId: null,
