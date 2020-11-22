@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Customer } from 'src/app/shared/customer.model';
+import { CustomerService } from 'src/app/shared/customer.service';
 import { OrderItem } from 'src/app/shared/order-item.model';
 import { Order } from 'src/app/shared/order.model';
 import { OrderService } from 'src/app/shared/order.service';
@@ -13,13 +15,17 @@ import { OrderItemsComponent } from '../order-items/order-items.component';
 export class OrderComponent implements OnInit {
   orderModel: Order = new Order();
   orderItemModel: Array<OrderItem> = new Array<OrderItem>();
+  customerList: Customer[];
   constructor(
     private orderService: OrderService,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private customerService: CustomerService
   ) {}
 
   ngOnInit(): void {
     this.orderItemModel = this.orderService.orderItemModel;
+
+    this.customerService.GetCustomerList().then(res => this.customerList = res as Customer[]);
   }
 
   AddOrEditOrderItem(orderItemIndex, orderId) {
@@ -33,9 +39,12 @@ export class OrderComponent implements OnInit {
 
     dialogConfig.data = { orderItemIndex, orderId };
 
-    this.matDialog.open(OrderItemsComponent, dialogConfig).afterClosed().subscribe(res =>{
-      this.updateGrandTotal();
-    });
+    this.matDialog
+      .open(OrderItemsComponent, dialogConfig)
+      .afterClosed()
+      .subscribe((res) => {
+        this.updateGrandTotal();
+      });
   }
 
   DeleteOrderItem(orderItemIndex, orderId) {
