@@ -33,6 +33,6 @@ export class OrderComponent implements OnInit {
 
     dialogConfig.data = { orderItemIndex, orderId };
 
-    this.matDialog.open(OrderItemsComponent);
+    this.matDialog.open(OrderItemsComponent, dialogConfig);
   }
 }

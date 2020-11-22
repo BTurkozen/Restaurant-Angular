@@ -14,6 +14,7 @@ import { OrderService } from 'src/app/shared/order.service';
 export class OrderItemsComponent implements OnInit {
   formData: OrderItem;
   itemList: Item[];
+  isValid: boolean = true;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
@@ -26,22 +27,29 @@ export class OrderItemsComponent implements OnInit {
     this.itemService
       .getItemList()
       .then((res) => (this.itemList = res as Item[]));
-      console.log(this.itemList);
-      console.log("this.data", this.data);
+    console.log(this.itemList);
+    console.log('this.data', this.data);
 
-    this.formData = {
-      OrderItemId: null,
-      OrderId: 0,
-      ItemId: 0,
-      ItemName: '',
-      Quantity: 0,
-      Total: 0,
-      Price: 0,
-    };
+    if (this.data === null) {
+      this.formData = {
+        OrderItemId: null,
+        OrderId: 0,
+        ItemId: 0,
+        ItemName: '',
+        Quantity: 0,
+        Total: 0,
+        Price: 0,
+      };
+    } else {
+      this.formData = Object.assign(
+        {},
+        this.orderService.orderItemModel[this.data.orderItemIndex]
+      );
+    }
   }
 
   updatePrice(ctrl) {
-    if (ctrl.selectedIndex === 0) {
+    if (ctrl.selectIndex === 0) {
       this.formData.Price = 0;
       this.formData.ItemName = '';
     } else {
@@ -58,7 +66,27 @@ export class OrderItemsComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    this.orderService.orderItemModel.push(form.value);
-    this.dialogRef.close();
+    if (this.validateForm(form.value)) {
+      if (this.data.orderItemIndex === null) {
+        this.orderService.orderItemModel.push(form.value);
+      } else {
+        this.orderService.orderItemModel[this.data.orderItemIndex] = form.value;
+      }
+      console.log(
+        'this.orderService.orderItem =>',
+        this.orderService.orderItemModel
+      );
+      this.dialogRef.close();
+    }
+  }
+  validateForm(formData: OrderItem) {
+    this.isValid = true;
+
+    if (formData.ItemId === 0) {
+      this.isValid = false;
+    } else if (formData.Quantity === 0) {
+      this.isValid = false;
+    }
+    return this.isValid;
   }
 }
