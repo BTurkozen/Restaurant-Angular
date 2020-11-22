@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Customer } from 'src/app/shared/customer.model';
 import { CustomerService } from 'src/app/shared/customer.service';
@@ -16,6 +17,9 @@ export class OrderComponent implements OnInit {
   orderModel: Order = new Order();
   orderItemModel: Array<OrderItem> = new Array<OrderItem>();
   customerList: Customer[];
+  isValid: boolean = true;
+  sOrderItemId: number;
+  sOrderId: number;
   constructor(
     private orderService: OrderService,
     private matDialog: MatDialog,
@@ -25,7 +29,22 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
     this.orderItemModel = this.orderService.orderItemModel;
 
-    this.customerService.GetCustomerList().then(res => this.customerList = res as Customer[]);
+    this.customerService
+      .GetCustomerList()
+      .then((res) => (this.customerList = res as Customer[]));
+  }
+
+  resetForm(form?: NgForm) {
+    if ((form = null)) {
+      form.resetForm();
+      this.orderModel = {
+        OrderId: 0,
+        OrderNo: Math.floor(100000 + Math.random() * 900000).toString(),
+        CustomerId: 0,
+        PaymentMethod: '',
+        GrantTotal: 0,
+      };
+    }
   }
 
   AddOrEditOrderItem(orderItemIndex, orderId) {
@@ -62,5 +81,23 @@ export class OrderComponent implements OnInit {
     this.orderModel.GrantTotal = parseFloat(
       this.orderModel.GrantTotal.toFixed(2)
     );
+  }
+
+  validateForm() {
+    this.isValid = true;
+    if (this.orderModel.CustomerId === 0) {
+      this.isValid = false;
+    } else if (this.orderItemModel.length === 0) {
+      this.isValid = false;
+    }
+    return this.isValid;
+  }
+
+  onSubmit(form: NgForm) {
+    if (this.validateForm()) {
+      this.orderService.saveOrder().subscribe((res) => {
+        this.resetForm();
+      });
+    }
   }
 }

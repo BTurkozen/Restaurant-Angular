@@ -1,4 +1,4 @@
-<form #form="ngForm" autocomplete="off">
+<form #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit(form)">
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-md-6">
             <div class="form-group">
@@ -12,18 +12,19 @@
             </div>
             <div class="form-group">
                 <label>Müşteri No</label>
-                <select name="CustomerId" #CustomerId="ngModel" [(ngModel)]="orderModel.CustomerId" class="form-control">
-          <option value="0">= Select =</option>
-          <option *ngFor="let customer of customerList" value="{{customer.customerId}}">{{customer.name}}</option>
-        </select>
+                <select name="CustomerId" #CustomerId="ngModel" [(ngModel)]="orderModel.CustomerId" class="form-control" [class.is-invalid]="!isValid && orderModel.CustomerId === 0">
+                    <option value="0">= Select =</option>
+                    <option *ngFor="let customer of customerList" value="{{customer.customerId}}">{{customer.name}}
+                    </option>
+                </select>
             </div>
             <div class="form-group">
                 <label>Ödeme Şekli</label>
                 <select name="PaymentMethod" #PaymentMethod="ngModel" [(ngModel)]="orderModel.PaymentMethod" class="form-control">
-          <option selected>= Lütfen bir ödeme tipi seçiniz... =</option>
-          <option value="1">= Nakit =</option>
-          <option value="2">= Kredi Kartı =</option>
-        </select>
+                    <option selected>= Lütfen bir ödeme tipi seçiniz... =</option>
+                    <option value="1">= Nakit =</option>
+                    <option value="2">= Kredi Kartı =</option>
+                </select>
             </div>
             <div class="form-group">
                 <label>Toplam Tutar</label>
@@ -42,12 +43,12 @@
                 <th>Adet</th>
                 <th>Toplam</th>
                 <th>
-                    <a class="btn btn-sm btn-success text-white" (click)="AddOrEditOrderItem(null, orderModel.OrderId)"><i
-              class="fa fa-plus mr-2"></i>Sipariş Ekle</a>
+                    <a class="btn btn-sm btn-success text-white" (click)="AddOrEditOrderItem(null, orderModel.OrderId)"><i class="fa fa-plus mr-2"></i>Sipariş
+                        Ekle</a>
                 </th>
             </thead>
             <tbody>
-                <tr *ngIf="orderItemModel.length == 0">
+                <tr *ngIf="orderItemModel.length == 0" [class.text-danger]="!isValid && orderItemModel.length == 0">
                     <td class="text-center text-danger">
                         Sipariş Edilen Kayıt Bulunamadı.
                     </td>
@@ -58,18 +59,17 @@
                     <td>{{ item.Quantity }}</td>
                     <td>{{ item.Total }}</td>
                     <td>
-                        <a class="btn btn-sm btn-warning text-white mr-2" (click)="AddOrEditOrderItem(i, orderModel.OrderId)"><i
-                class="fa fa-pencil "></i></a>
+                        <a class="btn btn-sm btn-warning text-white mr-2" (click)="AddOrEditOrderItem(i, orderModel.OrderId)"><i class="fa fa-pencil "></i></a>
                         <a class="btn btn-sm btn-danger text-white" (click)="DeleteOrderItem(i, orderModel.OrderId)"><i
-                class="fa fa-trash "></i></a>
+                                class="fa fa-trash "></i></a>
                     </td>
                 </tr>
             </tbody>
         </table>
         <div class="form-group">
             <button type="submit" class="btn btn-outline-dark">
-        <i class="fa fa-database">Submit</i>
-      </button>
+                <i class="fa fa-database">Kaydet</i>
+            </button>
         </div>
     </div>
 </form>
