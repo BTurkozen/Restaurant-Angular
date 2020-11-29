@@ -11,5 +11,6 @@ namespace Restaurant_Angular.Common.DTOs
         public decimal GrandTotal { get; set; }
         public string PaymentMethod { get; set; }
         public string CustomerId { get; set; }
+        public string CustomerName { get; set; }
     }
 }

@@ -18,6 +18,33 @@ namespace Restaurant_Angular.Business.Implementaion
         {
             _unitOfWork = unitOfWork;
         }
+
+        public Result<List<OrderDto>> GetOrders()
+        {
+            var data = _unitOfWork.orderRepository.GetAll(null, null, "Customer");
+            if (data != null)
+            {
+                List<OrderDto> returnModel = new List<OrderDto>();
+                foreach (var item in data)
+                {
+                    returnModel.Add(new OrderDto()
+                    {
+                        OrderSubDto = new OrderSubDto()
+                        {
+                            GrandTotal = item.GrantTotal,
+                            OrderNo = item.OrderNo,
+                            OrderId = item.OrderId,
+                            PaymentMethod = item.PaymentMethod,
+                            CustomerName = item.Customer.Name
+                        }
+                    });
+                }
+                return new Result<List<OrderDto>>(true, ResultConstant.RecordFound, returnModel);
+            }
+            return new Result<List<OrderDto>>(false, ResultConstant.RecordNotFound);
+
+        }
+
         public Result<bool> SaveOrder(OrderDto orderDto)
         {
             try
