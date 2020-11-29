@@ -14,24 +14,30 @@ export class OrderService {
 
   saveOrder(orderModel: Order) {
     this.formData.CustomerId = orderModel.CustomerId;
-    this.formData.GrantTotal = orderModel.GrantTotal;
+    this.formData.GrandTotal = orderModel.GrandTotal;
     this.formData.OrderId = orderModel.OrderId;
     this.formData.OrderNo = orderModel.OrderNo;
     this.formData.PaymentMethod = orderModel.PaymentMethod;
 
     var body = {
       OrderSubDto: this.formData,
-      orderItemModelDtos: this.orderItemModel,
+      OrderItemModelDtos: this.orderItemModel,
     };
 
-    return this.http.post(environment.apiUrl + 'Order/SaveOrder', body);
+    return this.http.post(environment.apiUrl + '/api/Order/SaveOrder', body);
   }
   GetOrderList() {
     var data = this.http
-      .get(environment.apiUrl + 'Order/GetOrders')
+      .get(environment.apiUrl + '/api/Order/GetOrders')
       .toPromise();
     console.log('Get Order List data =>', data);
 
     return data;
+  }
+
+  DeleteOrder(orderId: number) {
+    return this.http
+      .delete(environment.apiUrl + '/api/Order/DeleteOrder' + orderId)
+      .toPromise();
   }
 }

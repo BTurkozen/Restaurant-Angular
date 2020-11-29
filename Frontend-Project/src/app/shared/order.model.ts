@@ -1,9 +1,9 @@
 export class Order {
   OrderId: number;
   OrderNo: string;
-  GrantTotal: number;
+  GrandTotal: number;
   PaymentMethod: string;
   CustomerId: number;
-  CustomerName: string;
+  customerName: string;
   constructor(){}
 }

@@ -10,7 +10,7 @@ namespace Restaurant_Angular.Data.DbModels
         [Key]
         public int OrderId { get; set; }
         public string OrderNo { get; set; }
-        public decimal GrantTotal { get; set; }
+        public decimal GrandTotal { get; set; }
         public string PaymentMethod { get; set; }
         public int? CustomerId { get; set; }
         public virtual Customer Customer { get; set; }

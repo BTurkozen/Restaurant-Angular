@@ -8,6 +8,6 @@ import { environment } from 'src/environments/environment';
 export class CustomerService {
   constructor(private http: HttpClient) {}
   GetCustomerList() {
-   return this.http.get(environment.apiUrl + 'Customer/GetCustomerList').toPromise();
+   return this.http.get(environment.apiUrl + '/api/Customer/GetCustomerList').toPromise();
   }
 }

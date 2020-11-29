@@ -16,15 +16,15 @@ import { OrderItemsComponent } from '../order-items/order-items.component';
   styleUrls: ['./order.component.css'],
 })
 export class OrderComponent implements OnInit {
+  isValid: boolean = true;
+  customerList: Customer[];
   orderModel: Order = new Order();
   orderItemModel: Array<OrderItem> = new Array<OrderItem>();
-  customerList: Customer[];
-  isValid: boolean = true;
   sOrderItemId: number;
   sOrderId: number;
   constructor(
     private orderService: OrderService,
-    private matDialog: MatDialog,
+    private dialog: MatDialog,
     private customerService: CustomerService,
     private toastr: ToastrService,
     private route: Router
@@ -39,17 +39,16 @@ export class OrderComponent implements OnInit {
   }
 
   resetForm(form?: NgForm) {
-    if ((form = null)) {
-      form.resetForm();
-      this.orderModel = {
-        OrderId: 0,
-        OrderNo: Math.floor(100000 + Math.random() * 900000).toString(),
-        CustomerId: 0,
-        PaymentMethod: '',
-        GrantTotal: 0,
-        CustomerName : '',
-      };
-    }
+    if ((form = null)) form.resetForm();
+    this.orderModel = {
+      OrderId: 0,
+      OrderNo: Math.floor(100000 + Math.random() * 900000).toString(),
+      CustomerId: 0,
+      PaymentMethod: '',
+      GrandTotal: 0,
+      customerName: '',
+    };
+
     this.orderItemModel = [];
   }
 
@@ -64,7 +63,7 @@ export class OrderComponent implements OnInit {
 
     dialogConfig.data = { orderItemIndex, orderId };
 
-    this.matDialog
+    this.dialog
       .open(OrderItemsComponent, dialogConfig)
       .afterClosed()
       .subscribe((res) => {
@@ -78,22 +77,17 @@ export class OrderComponent implements OnInit {
   }
 
   updateGrandTotal() {
-    this.orderModel.GrantTotal = this.orderService.orderItemModel.reduce(
-      (prev, curr) => {
-        return prev + curr.Total;
-      },
-      0
-    );
-    this.orderModel.GrantTotal = parseFloat(
-      this.orderModel.GrantTotal.toFixed(2)
-    );
+    this.orderModel.GrandTotal = this.orderService.orderItemModel.reduce((prev, curr) => {
+      return prev + curr.Total;
+    }, 0);
+    this.orderModel.GrandTotal = parseFloat(this.orderModel.GrandTotal.toFixed(2));
   }
 
   validateForm() {
     this.isValid = true;
-    if (this.orderModel.CustomerId === 0) {
+    if (this.orderModel.CustomerId == 0 || this.orderModel.CustomerId == undefined) {
       this.isValid = false;
-    } else if (this.orderItemModel.length === 0) {
+    } else if (this.orderItemModel.length == 0) {
       this.isValid = false;
     }
     return this.isValid;
@@ -101,9 +95,9 @@ export class OrderComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     if (this.validateForm()) {
-      this.orderService.saveOrder(this.orderModel).subscribe((res) => {
+      this.orderService.saveOrder(this.orderModel).subscribe(res => {
         this.resetForm();
-        this.toastr.success('Tebrikler', 'Siparişiniz Başarıyla Oluştu...');
+        this.toastr.success('Tebrikler!', 'Siparişiniz Başarıyla Oluştu :)');
         this.route.navigate(['/orders']);
       });
     }

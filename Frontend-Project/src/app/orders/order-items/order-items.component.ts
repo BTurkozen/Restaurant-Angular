@@ -33,12 +33,12 @@ export class OrderItemsComponent implements OnInit {
     if (this.data === null) {
       this.formData = {
         OrderItemId: null,
-        OrderId: 0,
+        OrderId: null,
         ItemId: 0,
         ItemName: '',
+        Price: 0,
         Quantity: 0,
         Total: 0,
-        Price: 0,
       };
     } else {
       this.formData = Object.assign(
@@ -52,6 +52,7 @@ export class OrderItemsComponent implements OnInit {
     if (ctrl.selectedIndex == 0) {
       this.formData.Price = 0;
       this.formData.ItemName = '';
+      this.formData.Total = 0;
     } else {
       this.formData.Price = this.itemList[ctrl.target.selectedIndex - 1].price;
       this.formData.ItemName = this.itemList[
@@ -98,5 +99,8 @@ export class OrderItemsComponent implements OnInit {
       this.isValid = false;
     }
     return this.isValid;
+  }
+  close(){
+    this.dialogRef.close();
   }
 }

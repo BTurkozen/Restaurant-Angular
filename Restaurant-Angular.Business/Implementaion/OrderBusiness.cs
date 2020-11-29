@@ -30,7 +30,7 @@ namespace Restaurant_Angular.Business.Implementaion
                     returnModel.Add(new GetOrderDto()
                     {
                         
-                            GrandTotal = item.GrantTotal,
+                            GrandTotal = item.GrandTotal,
                             OrderNo = item.OrderNo,
                             OrderId = item.OrderId,
                             PaymentMethod = item.PaymentMethod,
@@ -50,7 +50,7 @@ namespace Restaurant_Angular.Business.Implementaion
             {
                 Order orderModel = new Order();
                 orderModel.CustomerId = Convert.ToInt32(orderDto.OrderSubDto.CustomerId);
-                orderModel.GrantTotal = Convert.ToInt32(orderDto.OrderSubDto.GrandTotal);
+                orderModel.GrandTotal = Convert.ToInt32(orderDto.OrderSubDto.GrandTotal);
                 orderModel.OrderNo = orderDto.OrderSubDto.OrderNo;
                 orderModel.PaymentMethod = orderDto.OrderSubDto.PaymentMethod;
 
