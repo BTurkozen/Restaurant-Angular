@@ -17,7 +17,7 @@ namespace Restaurant_Angular.UI.Controllers
         }
 
         [HttpGet("GetOrders")]
-        public List<OrderDto> GetOrders()
+        public List<GetOrderDto> GetOrders()
         {
             var result = _orderBusiness.GetOrders();
             return result.Data;

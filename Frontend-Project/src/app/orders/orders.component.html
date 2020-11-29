@@ -1,1 +1,19 @@
-<p>orders works!</p>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#Sipariş No</th>
+            <th scope="col">Müşteri</th>
+            <th scope="col">Ödeme Şekli</th>
+            <th scope="col">Toplam</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let order of orderList">
+            <th scope="row">{{order.OrderNo}}</th>
+            <td>{{order.CustomerName}}</td>
+            <td>{{order.PaymentMethod}}</td>
+            <td>{{order.GrantTotal}}</td>
+        </tr>
+
+    </tbody>
+</table>

@@ -47,6 +47,7 @@ export class OrderComponent implements OnInit {
         CustomerId: 0,
         PaymentMethod: '',
         GrantTotal: 0,
+        CustomerName : '',
       };
     }
     this.orderItemModel = [];

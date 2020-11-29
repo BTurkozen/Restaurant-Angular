@@ -9,6 +9,6 @@ namespace Restaurant_Angular.Business.Constracts
     public interface IOrderBusiness
     {
         Result<bool> SaveOrder(OrderDto orderDto);
-        Result<List<OrderDto>> GetOrders();
+        Result<List<GetOrderDto>> GetOrders();
     }
 }

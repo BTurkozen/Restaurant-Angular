@@ -4,4 +4,6 @@ export class Order {
   GrantTotal: number;
   PaymentMethod: string;
   CustomerId: number;
+  CustomerName: string;
+  constructor(){}
 }
