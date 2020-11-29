@@ -3,6 +3,7 @@ using Restaurant_Angular.Data.DataContext;
 using Restaurant_Angular.Data.DataContracts;
 using System;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Restaurant_Angular.Data.Implementaion
 {
@@ -49,9 +50,26 @@ namespace Restaurant_Angular.Data.Implementaion
             return query;
         }
 
+        public T GetFirstOrDefault(Expression<Func<T, bool>> filter = null, string includeProperties = null)
+        {
+            IQueryable<T> query = dbSet;
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+            if (includeProperties != null)
+            {
+                foreach (var item in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(item);
+                }
+            }
+            return query.FirstOrDefault();
+        }
+
         public void Remove(T entity)
         {
-            dbSet.Remove(entity); 
+            dbSet.Remove(entity);
         }
 
         public void Update(T entity)

@@ -10,5 +10,6 @@ namespace Restaurant_Angular.Business.Constracts
     {
         Result<bool> SaveOrder(OrderDto orderDto);
         Result<List<GetOrderDto>> GetOrders();
+        Result<bool> DeleteOrder(int orderId);
     }
 }

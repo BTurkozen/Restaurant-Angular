@@ -13,11 +13,11 @@ export class OrderService {
   constructor(private http: HttpClient) {}
 
   saveOrder(orderModel: Order) {
-    this.formData.CustomerId = orderModel.CustomerId;
-    this.formData.GrandTotal = orderModel.GrandTotal;
-    this.formData.OrderId = orderModel.OrderId;
-    this.formData.OrderNo = orderModel.OrderNo;
-    this.formData.PaymentMethod = orderModel.PaymentMethod;
+    this.formData.customerId = orderModel.customerId;
+    this.formData.grandTotal = orderModel.grandTotal;
+    this.formData.orderId = orderModel.orderId;
+    this.formData.orderNo = orderModel.orderNo;
+    this.formData.paymentMethod = orderModel.paymentMethod;
 
     var body = {
       OrderSubDto: this.formData,
@@ -37,7 +37,7 @@ export class OrderService {
 
   DeleteOrder(orderId: number) {
     return this.http
-      .delete(environment.apiUrl + '/api/Order/DeleteOrder' + orderId)
+      .delete(environment.apiUrl + '/api/Order/DeleteOrder/' + orderId)
       .toPromise();
   }
 }

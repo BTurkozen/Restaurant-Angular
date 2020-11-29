@@ -14,6 +14,6 @@ namespace Restaurant_Angular.Common.ResultConstant
 
         public static string RecordNotFound = "Kayıt Bulunamadı...";
 
-
+        public static string RecordRemoveSuccess = "Kayıt başarıyla silindi...";
     }
 }

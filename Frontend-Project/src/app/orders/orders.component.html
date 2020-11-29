@@ -13,12 +13,12 @@
     </thead>
     <tbody>
         <tr *ngFor="let order of orderList">
-            <th scope="row">{{order.OrderNo}}</th>
+            <th scope="row">{{order.orderNo}}</th>
             <td>{{order.customerName}}</td>
-            <td>{{order.PaymentMethod}}</td>
-            <td>{{order.GrandTotal}}</td>
+            <td>{{order.paymentMethod}}</td>
+            <td>{{order.grandTotal}}</td>
             <td>
-                <a class="btn btn-danger btn-sm" (click)="OnOrderDelete(order.OrderId)">
+                <a class="btn btn-danger btn-sm" (click)="OnOrderDelete(order.orderId)">
                     <i class="fa fa-trash"></i> Sil
                 </a>
             </td>

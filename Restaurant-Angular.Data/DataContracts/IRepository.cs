@@ -16,6 +16,7 @@ namespace Restaurant_Angular.Data.DataContracts
             );
 
         T Get(int id);
+        T GetFirstOrDefault(Expression<Func<T, bool>> filter = null, string includeProperties = null);
 
         void Add(T entity);
         void Update(T entity);

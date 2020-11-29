@@ -7,19 +7,19 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text"><b>#</b></div>
                     </div>
-                    <input name="OrderNo" #OrderNo="ngModel" [(ngModel)]="orderModel.OrderNo" class="form-control" />
+                    <input name="OrderNo" #OrderNo="ngModel" [(ngModel)]="orderModel.orderNo" class="form-control" />
                 </div>
             </div>
             <div class="form-group">
                 <label><b>Müşteri</b> </label>
-                <select name="CustomerId" #CustomerId="ngModel" [(ngModel)]="orderModel.CustomerId" class="form-control" [class.is-invalid]="!isValid">
+                <select name="CustomerId" #CustomerId="ngModel" [(ngModel)]="orderModel.customerId" class="form-control" [class.is-invalid]="!isValid">
                     <option value="0">- Select -</option>
                     <option *ngFor="let cus of customerList" value="{{cus.customerId}}">{{cus.name}}</option>
                 </select>
             </div>
             <div class="form-group">
                 <label><b>Ödeme Tipi</b></label>
-                <select name="PaymentMethod" #CustomerId="ngModel" [(ngModel)]="orderModel.PaymentMethod" class="form-control">
+                <select name="PaymentMethod" #CustomerId="ngModel" [(ngModel)]="orderModel.paymentMethod" class="form-control">
                     <option value="0">Lütfen Bir Ödeme Tipi Seçiniz</option>
                     <option value="1">Nakit</option>
                     <option value="2">Kredi Kartı</option>
@@ -31,7 +31,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text"><b>TL</b></div>
                     </div>
-                    <input name="GrandTotal" #OrderNo="ngModel" [(ngModel)]="orderModel.GrandTotal" class="form-control" />
+                    <input name="GrandTotal" #OrderNo="ngModel" [(ngModel)]="orderModel.grandTotal" class="form-control" />
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
             <th>Quantity</th>
             <th>Toplam</th>
             <th>
-                <a class="btn btn-sm btn-success text-white" (click)="AddOrEditOrderItem(null,orderModel.OrderId)">
+                <a class="btn btn-sm btn-success text-white" (click)="AddOrEditOrderItem(null,orderModel.orderId)">
                     <i class="fa fa-plus"></i> Sipariş Ekle</a>
             </th>
         </thead>
@@ -60,10 +60,10 @@
                 <td>{{item.Quantity}}</td>
                 <td>{{item.Total}}</td>
                 <td>
-                    <a class="btn btn-sm btn-success text-white" (click)="AddOrEditOrderItem(i,orderModel.OrderId)">
+                    <a class="btn btn-sm btn-success text-white" (click)="AddOrEditOrderItem(i,orderModel.orderId)">
                         <i class="fa fa-pencil"></i>
                     </a>
-                    <a class="btn btn-sm btn-danger text-white ml-1" (click)="DeleteOrderItem(i,orderModel.OrderId)">
+                    <a class="btn btn-sm btn-danger text-white ml-1" (click)="DeleteOrderItem(i,orderModel.orderId)">
                         <i class="fa fa-trash"></i>
                     </a>
                 </td>

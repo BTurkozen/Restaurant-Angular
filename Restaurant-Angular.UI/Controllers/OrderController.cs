@@ -24,10 +24,17 @@ namespace Restaurant_Angular.UI.Controllers
         }
 
         [HttpPost("SaveOrder")]
-        public bool SaveOrder([FromBody]OrderDto orderDto)
+        public bool SaveOrder([FromBody] OrderDto orderDto)
         {
             var result = _orderBusiness.SaveOrder(orderDto);
             return result.IsSuccess;
+        }
+
+        [HttpDelete("DeleteOrder/{id}")]
+        public bool DeleteOrder(int id)
+        {
+            var data = _orderBusiness.DeleteOrder(id);
+            return true;
         }
     }
 }

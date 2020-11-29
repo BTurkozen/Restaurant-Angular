@@ -41,11 +41,11 @@ export class OrderComponent implements OnInit {
   resetForm(form?: NgForm) {
     if ((form = null)) form.resetForm();
     this.orderModel = {
-      OrderId: 0,
-      OrderNo: Math.floor(100000 + Math.random() * 900000).toString(),
-      CustomerId: 0,
-      PaymentMethod: '',
-      GrandTotal: 0,
+      orderId: 0,
+      orderNo: Math.floor(100000 + Math.random() * 900000).toString(),
+      customerId: 0,
+      paymentMethod: '',
+      grandTotal: 0,
       customerName: '',
     };
 
@@ -77,15 +77,15 @@ export class OrderComponent implements OnInit {
   }
 
   updateGrandTotal() {
-    this.orderModel.GrandTotal = this.orderService.orderItemModel.reduce((prev, curr) => {
+    this.orderModel.grandTotal = this.orderService.orderItemModel.reduce((prev, curr) => {
       return prev + curr.Total;
     }, 0);
-    this.orderModel.GrandTotal = parseFloat(this.orderModel.GrandTotal.toFixed(2));
+    this.orderModel.grandTotal = parseFloat(this.orderModel.grandTotal.toFixed(2));
   }
 
   validateForm() {
     this.isValid = true;
-    if (this.orderModel.CustomerId == 0 || this.orderModel.CustomerId == undefined) {
+    if (this.orderModel.customerId == 0 || this.orderModel.customerId == undefined) {
       this.isValid = false;
     } else if (this.orderItemModel.length == 0) {
       this.isValid = false;

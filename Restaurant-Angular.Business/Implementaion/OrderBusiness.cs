@@ -6,6 +6,7 @@ using Restaurant_Angular.Data.DataContracts;
 using Restaurant_Angular.Data.DbModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Restaurant_Angular.Business.Implementaion
@@ -19,6 +20,31 @@ namespace Restaurant_Angular.Business.Implementaion
             _unitOfWork = unitOfWork;
         }
 
+        public Result<bool> DeleteOrder(int orderId)
+        {
+            try
+            {
+                if (orderId <= 0)
+                {
+                    return new Result<bool>(false, $"id => {orderId} Değeri 0'dan büyük olmalıdır.");
+                }
+                var data = _unitOfWork.orderRepository.GetFirstOrDefault(o => o.OrderId == orderId, "OrderItems");
+
+                foreach (var item in data.OrderItems.ToList())
+                {
+                    _unitOfWork.orderItemRepository.Remove(item);
+                }
+                _unitOfWork.orderRepository.Remove(data);
+                _unitOfWork.save();
+                return new Result<bool>(true, ResultConstant.RecordRemoveSuccess);
+            }
+            catch (Exception ex)
+            {
+
+                return new Result<bool>(false, ex.Message.ToString());
+            }
+        }
+
         public Result<List<GetOrderDto>> GetOrders()
         {
             var data = _unitOfWork.orderRepository.GetAll(null, null, "Customer");
@@ -29,13 +55,13 @@ namespace Restaurant_Angular.Business.Implementaion
                 {
                     returnModel.Add(new GetOrderDto()
                     {
-                        
-                            GrandTotal = item.GrandTotal,
-                            OrderNo = item.OrderNo,
-                            OrderId = item.OrderId,
-                            PaymentMethod = item.PaymentMethod,
-                            CustomerName = item.Customer.Name
-                        
+
+                        GrandTotal = item.GrandTotal,
+                        OrderNo = item.OrderNo,
+                        OrderId = item.OrderId,
+                        PaymentMethod = item.PaymentMethod,
+                        CustomerName = item.Customer.Name
+
                     });
                 }
                 return new Result<List<GetOrderDto>>(true, ResultConstant.RecordFound, returnModel);

@@ -1,9 +1,9 @@
 export class Order {
-  OrderId: number;
-  OrderNo: string;
-  GrandTotal: number;
-  PaymentMethod: string;
-  CustomerId: number;
+  orderId: number;
+  orderNo: string;
+  grandTotal: number;
+  paymentMethod: string;
+  customerId: number;
   customerName: string;
   constructor(){}
 }
