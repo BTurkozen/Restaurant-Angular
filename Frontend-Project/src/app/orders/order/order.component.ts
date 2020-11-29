@@ -95,7 +95,7 @@ export class OrderComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     if (this.validateForm()) {
-      this.orderService.saveOrder().subscribe((res) => {
+      this.orderService.saveOrder(this.orderModel).subscribe((res) => {
         this.resetForm();
       });
     }

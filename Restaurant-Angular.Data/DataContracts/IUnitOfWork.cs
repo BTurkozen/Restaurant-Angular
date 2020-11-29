@@ -6,6 +6,8 @@ namespace Restaurant_Angular.Data.DataContracts
     {
         IItemRepository itemRepository { get; }
         ICustomerRepository customerRepository { get; }
+        IOrderRepository orderRepository { get; }
+        IOrderItemRepository orderItemRepository { get; }
         void save();
     }
 }

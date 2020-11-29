@@ -32,6 +32,7 @@ namespace Restaurant_Angular.UI
             services.AddScoped<IApplicationUserBusiness, ApplicationUserBusiness>();
             services.AddScoped<IItemBusiness, ItemBusiness>();
             services.AddScoped<ICustomerBusiness, CustomerBusiness>();
+            services.AddScoped<IOrderBusiness, OrderBusiness>();
 
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("strConnection")));
 
@@ -43,10 +44,6 @@ namespace Restaurant_Angular.UI
 
             }));
 
-            //services.Configure<MvcOptions>(options =>
-            //{
-            //    options.Filters.Add(new CorsAuthorizationFilterFactory("MyPolicy"));
-            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

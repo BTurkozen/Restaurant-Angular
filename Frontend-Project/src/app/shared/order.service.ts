@@ -8,14 +8,20 @@ import { Order } from './order.model';
   providedIn: 'root',
 })
 export class OrderService {
-  formData: Order;
+  formData: Order = new Order();
   orderItemModel: Array<OrderItem> = [];
   constructor(private http: HttpClient) {}
 
-  saveOrder() {
+  saveOrder(orderModel: Order) {
+    this.formData.CustomerId = orderModel.CustomerId;
+    this.formData.GrantTotal = orderModel.GrantTotal;
+    this.formData.OrderId = orderModel.OrderId;
+    this.formData.OrderNo = orderModel.OrderNo;
+    this.formData.PaymentMethod = orderModel.PaymentMethod;
+
     var body = {
-      ...this.formData,
-      OrderItemModel: this.orderItemModel,
+      OrderSubDto: this.formData,
+      orderItemModelDtos: this.orderItemModel,
     };
 
     return this.http.post(environment.apiUrl + 'Order/SaveOrder', body);
