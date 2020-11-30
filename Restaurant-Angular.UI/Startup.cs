@@ -30,7 +30,7 @@ namespace Restaurant_Angular.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options=>options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IApplicationUserBusiness, ApplicationUserBusiness>();
@@ -49,7 +49,7 @@ namespace Restaurant_Angular.UI
             }));
 
 
-            var appSettingsSection = Configuration.GetSection("AppSettings");
+            var appSettingsSection = Configuration.GetSection("Token");
             services.Configure<AppSettings>(appSettingsSection);
 
 
