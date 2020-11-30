@@ -12,5 +12,7 @@ namespace Restaurant_Angular.Data.DbModels
     {
         [Column(TypeName ="nvarchar(150)")]
         public string Fullname { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }
